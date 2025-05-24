@@ -1,94 +1,124 @@
+
 <script setup lang="ts">
 import { parseDate } from "~/utils/parseDate";
 
-const { data } = await useAsyncData("blog", () =>
+const { data } = await useAsyncData("blog-list", () =>
   queryCollection("blog").order("id", "DESC").all()
 );
+
+// const posts = [
+//   {
+//     id: 1,
+//     title: "Bill Walsh leadership lessons",
+//     slug: "bill-walsh-leadership-lessons",
+//     excerpt:
+//       "Like to know the secrets of transforming a 2-14 team into a 3x Super Bowl winning Dynasty?",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Leadership" }, { name: "Management" }, { name: "Presentation" }],
+//   },
+//   {
+//     id: 2,
+//     title: "PM mental models",
+//     slug: "pm-mental-models",
+//     excerpt: "Mental models are simple expressions of complex processes or relationships.",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Product" }, { name: "Research" }, { name: "Frameworks" }],
+//   },
+//   {
+//     id: 3,
+//     title: "What is Wireframing?",
+//     slug: "what-is-wireframing",
+//     excerpt: "Introduction to Wireframing and its Principles. Learn from the best in the industry.",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Design" }, { name: "Research" }, { name: "Presentation" }],
+//   },
+//   {
+//     id: 4,
+//     title: "How collaboration makes us better designers",
+//     slug: "how-collaboration-makes-us-better-designers",
+//     excerpt: "Collaboration can make our teams stronger, and our individual designs better.",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Design" }, { name: "Research" }, { name: "Presentation" }],
+//   },
+//   {
+//     id: 5,
+//     title: "Our top 10 Javascript frameworks to use",
+//     slug: "our-top-10-javascript-frameworks",
+//     excerpt:
+//       "JavaScript frameworks make development easy with extensive features and functionalities.",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Software Development" }, { name: "Tools" }, { name: "SaaS" }],
+//   },
+//   {
+//     id: 6,
+//     title: "Creating a better CX Community",
+//     slug: "creating-better-cx-community",
+//     excerpt: "Starting a community doesn't need to be complicated, but how do you get started?",
+//     image: "https://placehold.co/384x240",
+//     tags: [{ name: "Podcasts" }, { name: "Customer Success" }, { name: "Presentation" }],
+//   },
+// ];
 </script>
 
 <template>
-  <div class="">
-    <div class="mx-auto max-w-screen-2xl">
-      <div class="flex justify-start items-center gap-2">
-        <h1 class="text-5xl font-bold first-letter:uppercase my-1">shin-701's Blog</h1>
+  <div>
+    <!-- Hero Section -->
+    <section class="py-6 sm:py-8 md:py-10 bg-dark-950">
+      <div class="container">
+        <div class="border-t border-b border-white py-6 sm:py-8 md:py-10">
+          <h1 class="text-white text-4xl sm:text-6xl md:text-8xl font-bold whitespace-nowrap">
+            ARTICLES
+          </h1>
+        </div>
       </div>
-      <hr />
-      <div
-        v-if="data"
-        class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-2 xl:grid-cols-2 xl:gap-8 mb-16"
-      >
-        <template
-          v-for="article in data"
-          :key="article.path"
-        >
-          <!-- article - start -->
-          <div
-            class="flex flex-col items-center overflow-hidden rounded-lg border border-gray-700 md:flex-row"
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="py-6 sm:py-8 bg-dark-950">
+      <div class="container">
+        <div v-if="data" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <article
+            v-for="post in data"
+            :key="post.id"
+            class="overflow-hidden"
           >
-            <div class="flex flex-col gap-2 p-4 lg:p-6">
-              <div>
-                <p class="flex space-x-1 my-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-yellow-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="text-sm">{{ parseDate(article.date) }}</span>
-                </p>
-                <p
-                  v-if="article.tag"
-                  class="flex space-x-1 my-1"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-yellow-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <template
-                    v-for="tag in article.tag"
-                    :key="tag"
-                  >
-                    <span class="underline mr-1 text-sm">{{ tag }}</span>
-                  </template>
-                </p>
+            <NuxtLink :to="post.path">
+              <img
+                :src="post.image"
+                :alt="post.title"
+                class="w-full h-48 sm:h-60 object-cover"
+              />
+              <div class="pt-4 sm:pt-6 space-y-3">
+                <div class="space-y-1.5">
+                  <div class="text-primary-700 text-xs font-semibold">{{ parseDate(post.date) }}</div>
+                  <div class="flex justify-between items-start">
+                    <h3 class="text-white text-lg sm:text-xl font-semibold">{{ post.title }}</h3>
+                    <button class="p-1">
+                      <div class="w-5 h-5 border-2 border-white rounded"></div>
+                    </button>
+                  </div>
+                  <p class="text-[#C0C5D0] text-sm line-clamp-2">{{ post.description }}</p>
+                </div>
+                <div v-if="post.tags" class="flex items-center gap-2 mt-0">
+                  <Icon
+                    name="heroicons:tag"
+                    class="w-5 h-5 text-yellow-200"
+                  />
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      v-for="tag in post.tags"
+                      :key="tag"
+                      class="text-white text-xs underline hover:text-primary-700 transition-colors"
+                    >
+                      #{{ tag }}
+                    </span>
+                  </div>
+                </div>
               </div>
-
-              <h2 class="text-xl font-bold my-0">
-                <a class="transition duration-100 no-underline">{{ article.title }}</a>
-              </h2>
-
-              <p class="text-sm text-gray-400">
-                This is a section of some simple filler text, also known as placeholder text.
-              </p>
-
-              <div>
-                <NuxtLink
-                  :to="article.path"
-                  class="font-semibold text-md text-indigo-500 transition duration-100 hover:text-yellow-600 active:text-indigo-700"
-                  >記事を読む</NuxtLink
-                >
-              </div>
-            </div>
-          </div>
-          <!-- article - end -->
-        </template>
+            </NuxtLink>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
-
-<style scoped></style>

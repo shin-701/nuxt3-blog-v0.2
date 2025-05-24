@@ -4,7 +4,7 @@ const { data } = await useAsyncData("tag", () =>
 );
 const tags = computed(() => {
   const arr = data.value
-      ?.map((article) => article.tag)
+      ?.map((article) => article.tags)
       .flat()
       .filter((tag) => !!tag);
   return new Set(arr);

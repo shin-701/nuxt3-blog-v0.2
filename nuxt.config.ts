@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxt/eslint', '@nuxt/icon', '@nuxtjs/tailwindcss'],
+  modules: ["@nuxt/content", "@nuxt/eslint", "@nuxt/icon", "@nuxtjs/tailwindcss"],
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
@@ -10,16 +10,25 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   content: {
     build: {
       markdown: {
         highlight: {
           theme: {
-            default: "monokai" as const,
-            dark: "github-dark" as const,
+            default: "monokai",
+            dark: "github-dark",
           },
         },
       },
     },
+    // renderer: {
+    //   見出しをリンクにする
+    //   anchorLinks: {
+    //     h2: false,
+    //     h3: false,
+    //     h4: false,
+    //   },
+    // },
   },
-})
+});

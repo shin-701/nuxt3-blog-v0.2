@@ -1,81 +1,132 @@
-<script setup lang="ts">
-const { data } = await useAsyncData("header", () => queryCollectionNavigation("docs"));
+<script setup>
+const isMenuOpen = ref(false);
+
+// Close menu when route changes
+watch(useRoute(), () => {
+  isMenuOpen.value = false;
+});
+
+// Close menu when clicking outside
+onMounted(() => {
+  const handleClickOutside = (event) => {
+    if (isMenuOpen.value && !event.target.closest("header")) {
+      isMenuOpen.value = false;
+    }
+  };
+
+  document.addEventListener("click", handleClickOutside);
+  onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
+  });
+});
 </script>
-
 <template>
-  <header class="relative flex items-center h-12 font-semibold">
-    <a
-      class="text-lg mr-auto"
-      href="/"
-      >Home</a
-    >
-    <div
-      class="shadow rounded-l-lg md:bg-transparent dark:md:bg-transparent bg-white dark:bg-[#0a0910] md:shadow-none md:rounded-none md:border-none md:h-auto md:static absolute transition-transform duration-300 ease-in translate-x-96 md:translate-x-0 top-12 -right-5 pl-4 pt-6 pb-4 md:p-0 h-[200px] w-[200px] z-50"
-    >
-      <nav
-        class="flex h-full flex-col justify-end gap-12 text-left md:flex-row md:w-full md:gap-5"
-      >
-        <div class="flex justify-center items-center md:justify-end gap-3 md:p-0">
-          <a
-            href="https://github.com/shin-701"
-            class="text-opacity-60"
-            rel="noopener noreferrer "
-            target="_blank"
-            aria-label="Github"
-          >
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-8 md:w-6"
-                viewBox="0 0 24 24"
-                stroke-width="1.3"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  stroke="none"
-                  d="M0 0h24v24H0z"
-                  fill="none"
-                ></path>
-                <path
-                  d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
-                ></path>
-              </svg>
-            </span> </a
-          ><a
-            href="https://x.com/shinTasomaRu"
-            class="text-opacity-60"
-            rel="noopener noreferrer "
-            target="_blank"
-            aria-label="Twitter"
-          >
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-8 md:w-6"
-                viewBox="0 0 24 24"
-                stroke-width="1.3"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  stroke="none"
-                  d="M0 0h24v24H0z"
-                  fill="none"
-                ></path>
-                <path
-                  d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z"
-                ></path>
-              </svg>
-            </span>
-          </a>
-        </div>
-      </nav>
-    </div>
+  <header class="py-4 bg-dark-950">
+    <div class="container py-2.5">
+      <!-- Desktop & Tablet Navigation -->
+      <div class="hidden sm:flex justify-between items-center">
+        <NuxtLink
+          to="/"
+          class="text-white text-base sm:text-lg font-semibold"
+          >HOME</NuxtLink
+        >
 
+        <nav class="flex items-center gap-6">
+          <NuxtLink
+            to="/blog"
+            class="text-white text-base sm:text-lg"
+            :class="$route.path === '/blog' ? 'font-bold border-b border-white' : 'font-normal'"
+          >
+            ARTICLES
+          </NuxtLink>
+
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white"
+          >
+            <Icon
+              name="mdi:twitter"
+              class="w-4 h-4 sm:w-5 sm:h-5"
+            />
+          </a>
+
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white"
+          >
+            <Icon
+              name="mdi:github"
+              class="w-4 h-4 sm:w-5 sm:h-5"
+            />
+          </a>
+        </nav>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="sm:hidden flex justify-between items-center">
+        <NuxtLink
+          to="/"
+          class="text-white text-base font-semibold"
+          >HOME</NuxtLink
+        >
+
+        <button
+          class="text-white"
+          @click="isMenuOpen = !isMenuOpen"
+        >
+          <Icon
+            :name="isMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        v-if="isMenuOpen"
+        class="sm:hidden absolute left-0 right-0 top-[72px] bg-dark-950 border-t border-dark-800"
+      >
+        <nav class="container py-4 space-y-4">
+          <NuxtLink
+            to="/blog"
+            class="block text-white text-base"
+            :class="$route.path === '/blog' ? 'font-bold' : 'font-normal'"
+            @click="isMenuOpen = false"
+          >
+            Blog
+          </NuxtLink>
+
+          <div class="flex flex-col gap-4">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-white"
+            >
+              <Icon
+                name="mdi:twitter"
+                class="w-5 h-5"
+              />
+            </a>
+
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-white"
+            >
+              <Icon
+                name="mdi:github"
+                class="w-5 h-5"
+              />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
   </header>
 </template>
