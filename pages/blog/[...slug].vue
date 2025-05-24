@@ -28,7 +28,7 @@ const { data } = await useAsyncData(route.path, () =>
             <img
               :src="data.image"
               :alt="data.title"
-              class="w-full h-48 sm:h-72 md:h-96 object-cover mb-8 sm:mb-12 md:mb-16"
+              class="w-full h-48 sm:h-72 md:h-[38rem] object-cover mb-8 sm:mb-12 md:mb-16"
             />
 
             <div class="max-w-3xl mx-auto">
@@ -36,7 +36,7 @@ const { data } = await useAsyncData(route.path, () =>
                 {{ data.title }}
               </h1>
 
-              <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-6 sm:mb-8">
+              <div class="flex flex-row sm:items-center gap-2 sm:gap-4 mb-6 sm:mb-8">
                 <Icon
                   name="mdi:file-document-edit-outline"
                   class="w-5 h-5 text-yellow-200"

@@ -22,13 +22,5 @@ export default defineNuxtConfig({
         },
       },
     },
-    // renderer: {
-    //   見出しをリンクにする
-    //   anchorLinks: {
-    //     h2: false,
-    //     h3: false,
-    //     h4: false,
-    //   },
-    // },
   },
 });

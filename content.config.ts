@@ -1,3 +1,4 @@
+import type { LazyTagLinks } from "#components";
 import { defineCollection, defineContentConfig, z } from "@nuxt/content";
 
 export default defineContentConfig({
@@ -11,7 +12,7 @@ export default defineContentConfig({
       type: "page",
       schema: z.object({
         draft: z.boolean(),
-        tag: z.array(z.string()),
+        tags: z.array(z.string()),
         date: z.string(),
         image: z.string(),
       }),

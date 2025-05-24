@@ -16,8 +16,8 @@ const { data:posts } = await useAsyncData("blog-top", () =>
     <section class="py-6 sm:py-8 md:py-10 bg-dark-950">
       <div class="container">
         <div class="border-t border-b border-white py-6 sm:py-8 md:py-10">
-          <h1 class="text-white text-4xl sm:text-6xl md:text-9xl font-bold whitespace-nowrap">
-            THE BLOG
+          <h1 class="text-white text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold whitespace-nowrap">
+            shin-701' Blog
           </h1>
         </div>
       </div>
@@ -49,7 +49,7 @@ const { data:posts } = await useAsyncData("blog-top", () =>
               <img
                 :src="posts[0].image"
                 :alt="posts[0].title"
-                class="w-full h-48 sm:h-56 object-cover"
+                class="w-full h-48 sm:h-64 object-cover"
               />
               <div class="space-y-4 sm:space-y-6">
                 <div class="space-y-2 sm:space-y-3">
