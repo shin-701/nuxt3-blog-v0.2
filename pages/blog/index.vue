@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { parseDate } from "~/utils/parseDate";
 
@@ -87,15 +86,12 @@ const { data } = await useAsyncData("blog-list", () =>
                 :src="post.image"
                 :alt="post.title"
                 class="w-full h-48 sm:h-60 object-cover"
-              />
+              >
               <div class="pt-4 sm:pt-6 space-y-3">
                 <div class="space-y-1.5">
                   <div class="text-primary-700 text-xs font-semibold">{{ parseDate(post.date) }}</div>
                   <div class="flex justify-between items-start">
                     <h3 class="text-white text-lg sm:text-xl font-semibold">{{ post.title }}</h3>
-                    <button class="p-1">
-                      <div class="w-5 h-5 border-2 border-white rounded"></div>
-                    </button>
                   </div>
                   <p class="text-[#C0C5D0] text-sm line-clamp-2">{{ post.description }}</p>
                 </div>

@@ -50,7 +50,7 @@ const { data:posts } = await useAsyncData("blog-top", () =>
                 :src="posts[0].image"
                 :alt="posts[0].title"
                 class="w-full h-48 sm:h-64 object-cover"
-              />
+              >
               <div class="space-y-4 sm:space-y-6">
                 <div class="space-y-2 sm:space-y-3">
                   <div class="text-primary-700 text-xs font-semibold">
@@ -60,9 +60,6 @@ const { data:posts } = await useAsyncData("blog-top", () =>
                     <h3 class="text-white text-lg sm:text-xl font-semibold">
                       {{ posts[0].title }}
                     </h3>
-                    <button class="p-1">
-                      <div class="w-5 h-5 border-2 border-white rounded"></div>
-                    </button>
                   </div>
                   <p class="text-[#C0C5D0] text-sm line-clamp-3">{{ posts[0].description }}</p>
                 </div>

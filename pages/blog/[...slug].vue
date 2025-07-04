@@ -44,7 +44,7 @@ const { data } = await useAsyncData(route.path, () =>
                 <div class="text-sm sm:text-base text-[#C0C5D0]">投稿日：{{ parseDate(data.date) }}</div>
               </div>
 
-              <div class="h-px bg-dark-800 mb-6 sm:mb-8"></div>
+              <div class="h-px bg-dark-800 mb-6 sm:mb-8" />
 
               <ContentRenderer
                 :value="data"
