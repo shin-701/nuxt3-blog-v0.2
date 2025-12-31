@@ -21,47 +21,18 @@ onMounted(() => {
 });
 </script>
 <template>
-  <header class="py-4 bg-dark-950">
-    <div class="container py-2.5">
-      <!-- Desktop & Tablet Navigation -->
+  <header class="py-4">
+    <div class="container py-2.5 bg-white rounded-lg">
       <div class="hidden sm:flex justify-between items-center">
-        <NuxtLink
-          to="/"
-          class="text-white text-base sm:text-lg font-semibold"
-          >HOME</NuxtLink
-        >
+        <NuxtLink to="/" class="text-base sm:text-xl font-semibold">HOME</NuxtLink>
 
         <nav class="flex items-center gap-6">
-          <NuxtLink
-            to="/blog"
-            class="text-white text-base sm:text-lg"
-            :class="$route.path === '/blog' ? 'font-bold border-b border-white' : 'font-normal'"
-          >
-            ARTICLES
-          </NuxtLink>
-
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white"
-          >
-            <Icon
-              name="mdi:twitter"
-              class="w-4 h-4 sm:w-5 sm:h-5"
-            />
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="flex items-center">
+            <Icon name="mdi:twitter" class="w-4 h-4 sm:w-8 sm:h-8" />
           </a>
 
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white"
-          >
-            <Icon
-              name="mdi:github"
-              class="w-4 h-4 sm:w-5 sm:h-5"
-            />
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center">
+            <Icon name="mdi:github" class="w-4 h-4 sm:w-8 sm:h-8" />
           </a>
         </nav>
       </div>
