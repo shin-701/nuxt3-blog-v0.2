@@ -11,71 +11,63 @@ const { data } = await useAsyncData("blog-list", () =>
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="py-6 sm:py-8 md:py-10">
-      <div class="container">
-        <div class="border-t border-b border-gray-00 py-6 sm:py-8 md:py-10">
-          <h1 class="ext-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold whitespace-nowrap">
-            shin-701' Blog
+    <section class="py-16 sm:py-24 md:py-32">
+      <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+        <div class="text-center">
+          <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-m3-on-surface leading-tight mb-6">
+            shin-701's<br>Tech Blog
           </h1>
+          <p class="text-body-large sm:text-title-large text-m3-on-surface-variant max-w-2xl mx-auto">
+            Daily notes and insights from a software engineer's journey
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Recent Posts -->
-    <section class="py-6 sm:py-8">
-      <div class="container">
+    <!-- Description -->
+    <section class="py-6 sm:py-8 bg-m3-surface-container-high">
+      <div class="container mx-auto px-4 md:px-6 max-w-4xl text-center">
         <ContentRenderer
           v-if="index"
           :value="index"
-          class="prose dark:prose-invert max-w-none"
+          class="prose prose-m3 dark:prose-invert max-w-none mx-auto
+                 prose-headings:text-m3-on-surface prose-headings:font-bold
+                 prose-p:text-m3-on-surface-variant prose-p:text-lg
+                 prose-a:text-m3-primary hover:prose-a:text-m3-primary/80"
         />
       </div>
     </section>
 
     <!-- Blog Posts -->
-    <section class="py-6 sm:py-8">
-      <div class="container">
-        <div v-if="data" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <article
+    <section class="py-6 sm:py-8 md:py-12">
+      <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+        <h2 class="text-headline-large text-m3-on-surface font-medium mb-6">
+          最新の記事
+        </h2>
+        <div v-if="data" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <ArticleCard
             v-for="post in data"
-            :key="post.id"
-            class="overflow-hidden"
-          >
-            <NuxtLink :to="post.path">
-              <img
-                :src="post.image"
-                :alt="post.title"
-                class="w-full h-48 sm:h-60 object-cover"
-              >
-              <div class="pt-4 sm:pt-6 space-y-3">
-                <div class="space-y-1.5">
-                  <div class="text-xs font-semibold">{{ parseDate(post.date) }}</div>
-                  <div class="flex justify-between items-start">
-                    <h3 class="text-lg sm:text-xl font-semibold">{{ post.title }}</h3>
-                  </div>
-                  <p class="text-sm line-clamp-2">{{ post.description }}</p>
-                </div>
-                <div v-if="post.tags" class="flex items-center gap-2 mt-0">
-                  <Icon
-                    name="heroicons:tag"
-                    class="w-5 h-5 text-yellow-800"
-                  />
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      v-for="tag in post.tags"
-                      :key="tag"
-                      class="text-xs underline hover:text-primary-700 transition-colors"
-                    >
-                      #{{ tag }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NuxtLink>
-          </article>
+            :key="post.path"
+            :article="{
+              _path: post.path,
+              title: post.title,
+              description: post.description,
+              image: post.image,
+              tags: post.tags,
+            }"
+          />
+        </div>
+        <div v-else class="text-center py-12">
+          <p class="text-body-large text-m3-on-surface-variant">
+            記事を読み込んでいます...
+          </p>
         </div>
       </div>
     </section>
     
   </div>
 </template>
+
+<style scoped>
+/* Scoped styles if needed */
+</style>
