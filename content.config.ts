@@ -1,10 +1,9 @@
-import type { LazyTagLinks } from "#components";
 import { defineCollection, defineContentConfig, z } from "@nuxt/content";
 
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
-      source: "**/*.md",
+      source: "index.md",
       type: "page",
     }),
     blog: defineCollection({
