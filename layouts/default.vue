@@ -1,16 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import OrganismsNavigation from '~/components/organisms/Navigation.vue'
+</script>
+
 <template>
-  <div class="min-h-screen bg-m3-surface text-m3-on-surface">
-    <!-- Navigation Rail (Desktop) -->
-    <NavigationRail />
+  <div class="min-h-screen bg-background text-foreground">
+    <OrganismsNavigation />
     
-    <!-- Bottom Navigation (Mobile) -->
-    <BottomNavigation />
-    
-    <!-- Main Content -->
-    <main class="md:ml-20 pb-24 md:pb-6">
+    <main>
       <slot />
     </main>
   </div>
 </template>
-
